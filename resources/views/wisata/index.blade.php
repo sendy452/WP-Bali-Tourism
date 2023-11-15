@@ -70,7 +70,7 @@
                                     <td>{{ $c->daerah  }}</td>
                                     <td>{{ $c->alamat }}</td>
                                     <td>{{ $c->fasilitas  }}</td>
-                                    <td>{{ date("h:i", strtotime($c->jam_buka)) .' - '. date("h:i", strtotime($c->jam_tutup))  }}</td>
+                                    <td>{{ date("H:i", strtotime($c->jam_buka)) .' - '. date("H:i", strtotime($c->jam_tutup))  }}</td>
                                     <td>{{ $c->ulasan  }}</td>
                                     <td>{{ $c->rating  }}</td>
                                     <td>
@@ -144,12 +144,12 @@
 
                             <div class="form-group">
                                 <label>Total Ulasan*</label>
-                                <input type="text" class="form-control" name="ulasan" placeholder="Total Ulasan" required/>
+                                <input type="number" class="form-control" pattern="[0-9]+" name="ulasan" placeholder="Total Ulasan" required/>
                             </div>
 
                             <div class="form-group">
                                 <label>Rating*</label>
-                                <input type="text" class="form-control" name="rating" placeholder="Total Rating" required/>
+                                <input type="text" class="form-control" pattern="[0-9]+(\.[0-9][0-9]?)?" name="rating" placeholder="Total Rating" required/>
                             </div>
 
                             <div class="form-group">

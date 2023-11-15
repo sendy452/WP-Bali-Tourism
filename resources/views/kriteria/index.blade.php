@@ -57,7 +57,7 @@
                                 <tr>
                                     <td>{{ $index  }}</td>
                                     <td>{{ $k->nama  }}</td>
-                                    <td>{{ $k->atribut }}</td>
+                                    <td>{{ $k->atribut == 'benefit' ? 'Benefit':'Cost' }}</td>
                                     <td>{{ $k->bobot  }}</td>
                                     <td>
                                         <a href="{{  url('kriteria',['id' => $k->id]) }}"><button class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="lihat data"><span class="glyphicon glyphicon-eye-open"></span> </button></a>

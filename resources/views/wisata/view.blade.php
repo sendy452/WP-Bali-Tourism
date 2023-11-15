@@ -48,7 +48,7 @@
                             <tr>
                                 <td><b>Jam Operasional</b></td>
                                 <td> : </td>
-                                <td>{{ date("h:i", strtotime($wisata->jam_buka)) .' - '. date("h:i", strtotime($wisata->jam_tutup))  }}</td>
+                                <td>{{ date("H:i", strtotime($wisata->jam_buka)) .' - '. date("H:i", strtotime($wisata->jam_tutup))  }}</td>
                             </tr>
                             <tr>
                                 <td><b>Total Ulasan</b></td>

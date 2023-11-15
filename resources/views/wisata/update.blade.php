@@ -88,12 +88,12 @@
     
                                 <div class="form-group">
                                     <label>Total Ulasan*</label>
-                                    <input type="text" class="form-control" name="ulasan" placeholder="Total Ulasan" value="{{ $wisata->ulasan }}" required/>
+                                    <input type="number" class="form-control" pattern="[0-9]+" name="ulasan" placeholder="Total Ulasan" value="{{ $wisata->ulasan }}" required/>
                                 </div>
     
                                 <div class="form-group">
                                     <label>Rating*</label>
-                                    <input type="text" class="form-control" name="rating" placeholder="Total Rating" value="{{ $wisata->rating }}" required/>
+                                    <input type="text" class="form-control" pattern="[0-9]+(\.[0-9][0-9]?)?" name="rating" placeholder="Total Rating" value="{{ $wisata->rating }}" required/>
                                 </div>
     
                                 <div class="form-group">
