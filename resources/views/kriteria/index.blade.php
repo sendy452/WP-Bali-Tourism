@@ -45,7 +45,7 @@
                                     <th>#</th>
                                     <th>Nama</th>
                                     <th>Atribut</th>
-                                    <th>Bobot</th>
+                                    <th>Nilai</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -110,7 +110,7 @@
 
                             <!-- form telp -->
                             <div class="form-group">
-                                <label>Bobot*</label>
+                                <label>Nilai*</label>
                                 <input type="text" class="form-control" name="bobot" pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="Bobot" required/>
                             </div>
                             <!-- end form telp-->

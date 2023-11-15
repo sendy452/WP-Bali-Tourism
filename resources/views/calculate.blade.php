@@ -23,7 +23,7 @@
 
                     <div class="panel-body">
                         <!-- Weight -->
-                        <h3>Weight</h3>
+                        <h3>Bobot</h3>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="weight">
                                 <thead>
@@ -32,7 +32,7 @@
                                             Kriteria
                                         </th>
                                         <th>
-                                            Weight
+                                            Bobot
                                         </th>
                                     </tr>
                                 </thead>
@@ -55,7 +55,7 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        Penerima
+                                        Wisata
                                     </th>
                                     <th>
                                         Nilai S
@@ -89,7 +89,7 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        Penerima
+                                        Wisata
                                     </th>
                                     <th>
                                         Nilai V
