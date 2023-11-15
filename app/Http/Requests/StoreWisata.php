@@ -25,10 +25,15 @@ class StoreWisata extends FormRequest
     {
         return [
             'nama' => 'required|max:50|regex:[[A-Za-z]+]',
+            'daerah' => 'required|max:50',
             'alamat' => 'required',
-            'jenis_kelamin' => 'required',
-            'tgl_lahir' =>  'required',
-            'telp' => 'required|max:20|regex:[[0-9]+]'
+            'fasilitas' => 'required',
+            'jam_buka' => 'required',
+            'jam_tutup' =>  'required',
+            'ulasan' =>  'required',
+            'rating' =>  'required',
+            'latitude' =>  'required|max:50',
+            'longitude' =>  'required|max:50',
         ];
     }
 }

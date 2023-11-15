@@ -44,59 +44,67 @@
                         </div>
 
                         <div class="create-form">
-                            <form method="post" action="{{ url('wisata', ['id' => $penerima->id ]) }}">
+                            <form method="post" action="{{ url('wisata', ['id' => $wisata->id ]) }}">
 
                                 <input name="_method" type="hidden" value="PUT">
 
                                 {{ csrf_field() }}
 
                                 <div class="form-group">
-                                    <label>NIS*</label>
-                                    <input type="text" pattern="[0-9]+" class="form-control" name="nis" placeholder="NIS" value="{{ $penerima->nis  }}"  required/>
+                                    <label>Nama Wisata*</label>
+                                    <input type="text" class="form-control" name="nama" placeholder="Nama Wisata" value="{{ $wisata->nama }}" required/>
                                 </div>
-
-                                <!-- form nama -->
+    
                                 <div class="form-group">
-                                    <label>Nama*</label>
-                                    <input type="text" pattern="[A-Za-z]+" class="form-control" name="nama" placeholder="Nama" value="{{ $penerima->nama  }}"/>
+                                    <label>Daerah*</label>
+                                    <input type="text" class="form-control" name="daerah" placeholder="Daerah" value="{{ $wisata->daerah }}" required/>
                                 </div>
-                                <!-- end form nama -->
-
-                                <!-- form alamat -->
+    
                                 <div class="form-group">
                                     <label>Alamat*</label>
-                                    <textarea class="form-control" name="alamat" placeholder="Alamat">{{ $penerima->alamat  }}</textarea>
+                                    <textarea class="form-control" name="alamat" placeholder="Alamat" required>{{ $wisata->alamat }}</textarea>
                                 </div>
-                                <!-- end form alamat -->
-
-                                <!-- form jenis-kelamin -->
+    
                                 <div class="form-group">
-                                    <label>Jenis Kelamin*</label>
-                                    <select class="form-control" name="jenis_kelamin">
-                                        <option value="L" {{ ($penerima->jenis_kelamin=='L') ? "selected" : ""}}>Laki-laki</option>
-                                        <option value="P" {{ ($penerima->jenis_kelamin=='P') ? "selected" : ""}}>Perempuan</option>
-                                    </select>
+                                    <label>Fasilitas*</label>
+                                    <textarea class="form-control" name="fasilitas" placeholder="Fasilitas" required>{{ $wisata->fasilitas }}</textarea>
                                 </div>
-                                <!-- end form jenis-kelamin -->
-
-                                <!-- form calender -->
+    
                                 <div class="form-group">
-                                    <label>Tanggal Lahir</label>
+                                    <label>Jam Operasional*</label>
                                     <div class="input-group">
-                                        <input type="text" id="date" class="form-control" name="tgl_lahir" value="{{ $penerima->tgl_lahir  }}" readonly>
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                              <input type="time" class="form-control" name="jam_buka" value="{{ $wisata->jam_buka }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <input type="time" class="form-control" name="jam_tutup" value="{{ $wisata->jam_tutup }}" required>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end form calender -->
-
-                                <!-- form telp -->
+    
                                 <div class="form-group">
-                                    <label>Telp*</label>
-                                    <input type="text" class="form-control" name="telp" placeholder="Telp" value="{{ $penerima->telp  }}"/>
+                                    <label>Total Ulasan*</label>
+                                    <input type="text" class="form-control" name="ulasan" placeholder="Total Ulasan" value="{{ $wisata->ulasan }}" required/>
                                 </div>
-                                <!-- end form telp-->
+    
+                                <div class="form-group">
+                                    <label>Rating*</label>
+                                    <input type="text" class="form-control" name="rating" placeholder="Total Rating" value="{{ $wisata->rating }}" required/>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label>Latitude*</label>
+                                    <input type="text" class="form-control" name="latitude" placeholder="Latitude" value="{{ $wisata->latitude }}" required/>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label>Longitude*</label>
+                                    <input type="text" class="form-control" name="longitude" placeholder="Longitude" value="{{ $wisata->longitude }}" required/>
+                                </div>
 
                                 <button class="btn btn-warning" type="submit">Save</button>
                             </form>

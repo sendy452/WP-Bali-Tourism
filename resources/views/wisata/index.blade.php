@@ -49,10 +49,13 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>NIS</th>
                                     <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Telpon</th>
+                                    <th>Daerah</th>
+                                    <th>Alamat</th>
+                                    <th>Fasilitas</th>
+                                    <th>Jam Operasional</th>
+                                    <th>Ulasan</th>
+                                    <th>Rating</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -63,10 +66,13 @@
                                 @foreach($wisata as $c)
                                 <tr>
                                     <td>{{ (($wisata->currentPage() - 1 ) * $wisata->perPage() ) + $loop->iteration }}</td>
-                                    <td>{{ $c->nis  }}</td>
                                     <td>{{ $c->nama  }}</td>
-                                    <td>{{ ($c->jenis_kelamin == 'L') ? 'laki-laki' : 'perempuan' }}</td>
-                                    <td>{{ $c->telp  }}</td>
+                                    <td>{{ $c->daerah  }}</td>
+                                    <td>{{ $c->alamat }}</td>
+                                    <td>{{ $c->fasilitas  }}</td>
+                                    <td>{{ date("h:i", strtotime($c->jam_buka)) .' - '. date("h:i", strtotime($c->jam_tutup))  }}</td>
+                                    <td>{{ $c->ulasan  }}</td>
+                                    <td>{{ $c->rating  }}</td>
                                     <td>
                                         <a href="{{  url('wisata',['id' => $c->id]) }}"><button class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="lihat data"><span class="glyphicon glyphicon-eye-open"></span> </button></a>
                                         <a href="{{  url()->route('wisata.edit', ['id' => $c->id])}}"><button class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="ubah data"><span class="glyphicon glyphicon-pencil"></span> </button></a>
@@ -100,55 +106,61 @@
                     </div>
                     <div class="modal-body">
                         <div class="create-form">
-                            <!-- form nama -->
                             <div class="form-group">
-                                <label>NIS*</label>
-                                <input type="text" pattern="[0-9]+" class="form-control" name="nis" placeholder="NIS" required/>
+                                <label>Nama Wisata*</label>
+                                <input type="text" class="form-control" name="nama" placeholder="Nama Wisata" required/>
                             </div>
-                            <!-- end form nama -->
 
-                            <!-- form nama -->
                             <div class="form-group">
-                                <label>Nama*</label>
-                                <input type="text" pattern="[A-Za-z]+" class="form-control" name="nama" placeholder="Nama" required/>
+                                <label>Daerah*</label>
+                                <input type="text" class="form-control" name="daerah" placeholder="Daerah" required/>
                             </div>
-                            <!-- end form nama -->
 
-                            <!-- form alamat -->
                             <div class="form-group">
                                 <label>Alamat*</label>
                                 <textarea class="form-control" name="alamat" placeholder="Alamat" required></textarea>
                             </div>
-                            <!-- end form alamat -->
 
-                            <!-- form jenis-kelamin -->
                             <div class="form-group">
-                                <label>Jenis Kelamin*</label>
-                                <select class="form-control" name="jenis_kelamin" required>
-                                    <option value="L">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
-                                </select>
+                                <label>Fasilitas*</label>
+                                <textarea class="form-control" name="fasilitas" placeholder="Fasilitas" required></textarea>
                             </div>
-                            <!-- end form jenis-kelamin -->
 
-                            <!-- form calender -->
                             <div class="form-group">
-                                <label>Tanggal Lahir</label>
+                                <label>Jam Operasional*</label>
                                 <div class="input-group">
-                                    <input type="text" id="date" class="form-control" name="tgl_lahir" readonly required>
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                          <input type="time" class="form-control" name="jam_buka" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="time" class="form-control" name="jam_tutup" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- end form calender -->
 
-                            <!-- form telp -->
                             <div class="form-group">
-                                <label>Telp*</label>
-                                <input type="text" class="form-control" name="telp" pattern="[0-9]+" placeholder="Telp" required/>
+                                <label>Total Ulasan*</label>
+                                <input type="text" class="form-control" name="ulasan" placeholder="Total Ulasan" required/>
                             </div>
-                            <!-- end form telp-->
+
+                            <div class="form-group">
+                                <label>Rating*</label>
+                                <input type="text" class="form-control" name="rating" placeholder="Total Rating" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Latitude*</label>
+                                <input type="text" class="form-control" name="latitude" placeholder="Latitude" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Longitude*</label>
+                                <input type="text" class="form-control" name="longitude" placeholder="Longitude" required/>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -156,9 +168,9 @@
                         <button type="submit" class="btn btn-success">Tambah</button>
                     </div>
                 </form>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
     <!--Modal Create-->
 
     <!--Modal Delete-->
@@ -183,8 +195,8 @@
                         <input type="submit" class="btn btn-danger" value="Hapus"/>
                     </div>
                 </form>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
+            </div>
+        </div>
     </div>
     <!--Modal Delete-->
 @endsection

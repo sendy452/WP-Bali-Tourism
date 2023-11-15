@@ -96,7 +96,7 @@ class KriteriaController extends Controller
             $request->session()->flash('success', 'Berhasil mengubah data kriteria.');
             return redirect()->action('KriteriaController@index');
         }else{
-            $request->session()->flash('error', 'Gagal mengubah data wisata beasiswa.');
+            $request->session()->flash('error', 'Gagal mengubah data wisata.');
         }
         return view('kriteria.update', ['kriteria' => $kriteria, 'menu' => 'kriteria' , 'title' => 'Ubah data kriteria' . $kriteria->nama]);
     }

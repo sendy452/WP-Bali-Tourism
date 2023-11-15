@@ -51,7 +51,7 @@ class WisataController extends Controller
     {
         $penerima = Wisata::create($request->except(['_token']));
         if($penerima){
-            $request->session()->flash('success', 'Berhasil menambahkan data wisata beasiswa.');
+            $request->session()->flash('success', 'Berhasil menambahkan data wisata.');
         }else{
             $request->session()->flash('error', 'Gagal menambahkan data wisata.');
         }
@@ -66,8 +66,8 @@ class WisataController extends Controller
      */
     public function show($id)
     {
-        $penerima = Wisata::findOrFail($id);
-        return view('wisata.view', ['penerima' => $penerima, 'menu' => 'wisata' , 'title' => 'Detail data ' . $penerima->nama]);
+        $wisata = Wisata::findOrFail($id);
+        return view('wisata.view', ['wisata' => $wisata, 'menu' => 'wisata' , 'title' => 'Detail data ' . $wisata->nama]);
     }
 
     /**
@@ -78,8 +78,8 @@ class WisataController extends Controller
      */
     public function edit($id)
     {
-        $penerima = Wisata::findOrFail($id);
-        return view('wisata.update', ['penerima' => $penerima, 'menu' => 'wisata' , 'title' => 'Ubah data ' . $penerima->nama]);
+        $wisata = Wisata::findOrFail($id);
+        return view('wisata.update', ['wisata' => $wisata, 'menu' => 'wisata' , 'title' => 'Ubah data ' . $wisata->nama]);
     }
 
     /**
@@ -92,28 +92,25 @@ class WisataController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'nis' => 'required|max:20|regex:[[0-9]+]',
             'nama' => 'required|max:50|regex:[[A-Za-z]+]',
+            'daerah' => 'required|max:50',
             'alamat' => 'required',
-            'jenis_kelamin' => 'required',
-            'tgl_lahir' =>  'required',
-            'telp' => 'required|max:20|regex:[[0-9]+]'
+            'fasilitas' => 'required',
+            'jam_buka' => 'required',
+            'jam_tutup' =>  'required',
+            'ulasan' =>  'required',
+            'rating' =>  'required',
+            'latitude' =>  'required|max:50',
+            'longitude' =>  'required|max:50',
         ]);
         $penerima = Wisata::findOrFail($id);
-        $nisIsExist = Wisata::where('id','<>',$id)->where('nis','=',$request->nis)->first();
-        if($nisIsExist){
-            $this->validate($request,[
-               'nis' => 'required|max:20|regex:[[0-9]+]|unique:wisata'
-            ]);
-            return view('wisata.update', ['penerima' => $penerima, 'menu' => 'wisata' , 'title' => 'Ubah data ' . $penerima->nama]);
-        }
 
         $update = $penerima->update($request->except(['_token','_method']));
         if($update){
-            $request->session()->flash('success', 'Berhasil mengubah data wisata beasiswa.');
+            $request->session()->flash('success', 'Berhasil mengubah data wisata.');
             return redirect()->action('WisataController@index');
         }else{
-            $request->session()->flash('error', 'Gagal mengubah data wisata beasiswa.');
+            $request->session()->flash('error', 'Gagal mengubah data wisata.');
         }
         return view('wisata.update', ['penerima' => $penerima, 'menu' => 'wisata' , 'title' => 'Ubah data ' . $penerima->nama]);
     }
@@ -128,9 +125,9 @@ class WisataController extends Controller
     {
         $penerima = Wisata::findOrFail($id);
         if($penerima->delete()){
-            $request->session()->flash('success','Berhasil menghapus data wisata beasiswa.');
+            $request->session()->flash('success','Berhasil menghapus data wisata.');
         }else{
-            $request->session()->flash('error','Gagal menghapus data wisata beasiswa.');
+            $request->session()->flash('error','Gagal menghapus data wisata.');
         }
         return redirect()->action('WisataController@index');
     }

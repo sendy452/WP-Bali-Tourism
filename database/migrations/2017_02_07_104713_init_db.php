@@ -26,10 +26,15 @@ class InitDb extends Migration
         Schema::create('wisata', function(Blueprint $table){
             $table->increments('id');
             $table->string('nama', 50);
+            $table->string('daerah', 50);
             $table->text('alamat');
-            $table->enum('jenis_kelamin',['L','P']);
-            $table->date('tgl_lahir');
-            $table->string('telp',20);
+            $table->text('fasilitas');
+            $table->time('jam_buka');
+            $table->time('jam_tutup');
+            $table->integer('ulasan');
+            $table->double('rating');
+            $table->string('latitude', 50);
+            $table->string('longitude', 50);
             $table->timestamps();
         });
 

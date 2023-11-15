@@ -26,34 +26,49 @@
                         </div>
                         <table class="table table-bordered">
                             <tr>
-                                <td><b>NIS</b></td>
-                                <td width="1%"> : </td>
-                                <td>{{ $penerima->nis  }}</td>
-                            </tr>
-                            <tr>
                                 <td><b>Nama</b></td>
                                 <td width="1%"> : </td>
-                                <td>{{ $penerima->nama  }}</td>
+                                <td>{{ $wisata->nama  }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Daerah</b></td>
+                                <td> : </td>
+                                <td>{{ $wisata->daerah  }}</td>
                             </tr>
                             <tr>
                                 <td><b>Alamat</b></td>
                                 <td> : </td>
-                                <td>{{ $penerima->alamat  }}</td>
+                                <td>{{ $wisata->alamat  }}</td>
                             </tr>
                             <tr>
-                                <td><b>Jenis Kelamin</b></td>
+                                <td><b>Fasilitas</b></td>
                                 <td> : </td>
-                                <td>{{ ($penerima->jenis_kelamin == 'L') ? "Laki-laki" : "Perempuan"  }}</td>
+                                <td>{{ $wisata->fasilitas  }}</td>
                             </tr>
                             <tr>
-                                <td><b>Tanggal Lahir</b></td>
+                                <td><b>Jam Operasional</b></td>
                                 <td> : </td>
-                                <td>{{ date_format(new DateTime($penerima->tgl_lahir), 'd F Y')  }}</td>
+                                <td>{{ date("h:i", strtotime($wisata->jam_buka)) .' - '. date("h:i", strtotime($wisata->jam_tutup))  }}</td>
                             </tr>
                             <tr>
-                                <td><b>Telp</b></td>
+                                <td><b>Total Ulasan</b></td>
                                 <td> : </td>
-                                <td>{{ $penerima->telp  }}</td>
+                                <td>{{ $wisata->ulasan  }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Rating</b></td>
+                                <td> : </td>
+                                <td>{{ $wisata->rating  }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Latitude</b></td>
+                                <td> : </td>
+                                <td>{{ $wisata->latitude  }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Longitude</b></td>
+                                <td> : </td>
+                                <td>{{ $wisata->longitude  }}</td>
                             </tr>
                         </table>
                     </div>
