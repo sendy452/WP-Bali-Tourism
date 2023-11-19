@@ -20,7 +20,7 @@
                 <li id="li-kriteria"><a href="{{ url('kriteria')  }}">Kriteria</a></li>
                 <li id="li-list"><a href="{{ url('home/list')  }}">Daftar Nilai</a></li>
                 <li id="li-user"><a href="{{ url('user')  }}">User Management</a></li>
-                <li id="li-print"><a class="btn-print" href="{{ url('print')  }}" target="_blank">Cetak Laporan</a></li>
+                <li id="li-print"><a class="btn-print" href="{{ url('print')  }}" target="_blank">Cetak Ranking</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

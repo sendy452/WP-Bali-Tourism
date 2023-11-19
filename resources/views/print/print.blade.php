@@ -22,7 +22,7 @@
     <br/>
 
     <div class="content">
-        <h4 align="center">Laporan Nilai Wisata</h4>
+        <h4 align="center">Ranking Wisata</h4>
         <div class="row" style="margin-top: 30px;">
             <div class="col-md-6 col-md-offset-3">
                 <table class="table table-bordered">
