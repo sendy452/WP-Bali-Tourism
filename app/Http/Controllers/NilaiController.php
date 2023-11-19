@@ -25,20 +25,20 @@ class NilaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($penerima)
+    public function create($wisata)
     {
-        $penerimaObj = Wisata::findOrFail($penerima);
+        $wisataObj = Wisata::findOrFail($wisata);
         $kriteria = Kriteria::all();
         $data = [];
-        foreach ($penerimaObj->nilai as $item) {
+        foreach ($wisataObj->nilai as $item) {
             $data[$item->kriteria_id] = $item->nilai;
         }
         return view('nilai.create', [
-            'penerima' => $penerimaObj,
+            'wisata' => $wisataObj,
             'kriteria' => $kriteria,
             'menu' => 'wisata' ,
             'data' => $data,
-            'title' => 'Kriteria nilai ' . $penerimaObj->nama]);
+            'title' => 'Kriteria nilai ' . $wisataObj->nama]);
     }
 
     /**
@@ -49,21 +49,26 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-        $penerima = $request->input('penerima');
+        $wisata = $request->input('wisata');
         $nilai = $request->input('kriteria');
         $kriteria = Kriteria::all();
 
         foreach ($kriteria as $k){
             if($nilai[$k->id]!=null){
-                if(!$this->chekRecordIsExist($penerima, $k->id)){
+                if(!$this->chekRecordIsExist($wisata, $k->id)){
                     $in_nilai = new Nilai();
-                    $in_nilai->wisata_id = $penerima;
+                    $in_nilai->wisata_id = $wisata;
                     $in_nilai->kriteria_id = $k->id;
                     $in_nilai->nilai = $nilai[$k->id];
                     if(!$in_nilai->save()){
                         break;
                         $request->session()->flash('error', "Failed to save nilai");
                     }
+                } else {
+                    $in_nilai = Nilai::where('wisata_id', $wisata)->where('kriteria_id', $k->id)->first();
+                    $in_nilai->update([
+                        $in_nilai->nilai = $nilai[$k->id]
+                    ]);
                 }
             }
         }

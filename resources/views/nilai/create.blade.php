@@ -38,9 +38,9 @@
                             </a>
                         </div>
                         <div class="create-form">
-                            <form method="post" action="{{ url('nilai/create', ['id' => $penerima->id ]) }}">
+                            <form method="post" action="{{ url('nilai/create', ['id' => $wisata->id ]) }}">
                                 {{ csrf_field() }}
-                                <input type="hidden" name="penerima" value="{{  $penerima->id }}"/>
+                                <input type="hidden" name="wisata" value="{{  $wisata->id }}"/>
                                 <table class="table table-bordered">
                                 @foreach($kriteria as $k)
                                     <tr>
