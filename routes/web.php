@@ -32,3 +32,4 @@ Route::post('/user/update/{id}','UserController@update')->name('user.update');
 Route::post('/user/delete/{id}','UserController@destroy')->name('user.delete');
 Route::post('/user/store','UserController@store')->name('user.store');
 Route::post('/user/chpassword/{id}','UserController@chpassword')->name('user.chpassword');
+Route::resource('jarak','JarakController');
