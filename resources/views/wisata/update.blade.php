@@ -57,7 +57,8 @@
     
                                 <div class="form-group">
                                     <label>Daerah*</label>
-                                    <input type="text" class="form-control" name="daerah" placeholder="Daerah" value="{{ $wisata->daerah }}" required/>
+                                    <select class="form-control" id="daerah" name="daerah" required>
+                                    </select>
                                 </div>
     
                                 <div class="form-group">
@@ -128,5 +129,28 @@
             format : 'yyyy-mm-dd'
         });
     });
+    var daerah_wisata = {!! json_encode($wisata->daerah) !!};
+
+    const daerah = document.getElementById("daerah");
+    const getPost = async () => {
+        const response = await fetch("https://www.emsifa.com/api-wilayah-indonesia/api/regencies/51.json");
+        const data = response.json();
+        return data;
+    };
+
+    const displayOption = async () => {
+        const options = await getPost();
+        options.forEach(option => {
+            const newOption = document.createElement("option");
+            newOption.value = option.name;
+            newOption.text = option.name;
+            daerah.appendChild(newOption);
+            
+            if(newOption.value == daerah_wisata) {
+                newOption.selected = true;
+            }
+        });
+    };
+    displayOption();
 </script>
 @endpush
