@@ -30,49 +30,72 @@
                 @include('component.alert')
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ $title  }}</div>
+                    <div class="panel-heading">{{ $title }}</div>
                     <div class="panel-body">
-                        <div class="form-group">
+                        <div class="col-md-12 table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Nilai Bobot</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Sangat Tidak Penting</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Tidak Penting</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Penting</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Sangat Penting</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-12 form-group">
                             <button class="btn btn-success" data-toggle="modal" href="#create">
                                 <span class="glyphicon glyphicon-plus-sign"></span>
                                 Tambah Kriteria
                             </button>
                         </div>
-			<div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nama</th>
-                                    <th>Atribut</th>
-                                    <th>Nilai</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $index=1;
-                                @endphp
-                                @foreach($kriteria as $k)
-                                <tr>
-                                    <td>{{ $index  }}</td>
-                                    <td>{{ $k->nama  }}</td>
-                                    <td>{{ $k->atribut == 'benefit' ? 'Benefit':'Cost' }}</td>
-                                    <td>{{ $k->bobot  }}</td>
-                                    <td>
-                                        <a href="{{  url('kriteria',['id' => $k->id]) }}"><button class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="lihat data"><span class="glyphicon glyphicon-eye-open"></span> </button></a>
-                                        <a href="{{  url()->route('kriteria.edit', ['id' => $k->id])}}"><button class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="ubah data"><span class="glyphicon glyphicon-pencil"></span> </button></a>
-                                        <a href="#" data-id="{{ $k->id  }}" class="destroy"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="hapus data"><span class="glyphicon glyphicon-trash"></span> </button></a>
-                                    </td>
-                                </tr>
-                                @php
-                                    $index++;
-                                @endphp
-                                @endforeach
-                            </tbody>
-                        </table>
-			</div>
-                        {{ $kriteria->links()  }}
+			            <div class="col-md-12 table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nama</th>
+                                        <th>Atribut</th>
+                                        <th>Nilai</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $index=1;
+                                    @endphp
+                                    @foreach($kriteria as $k)
+                                    <tr>
+                                        <td>{{ $index  }}</td>
+                                        <td>{{ $k->nama  }}</td>
+                                        <td>{{ $k->atribut == 'benefit' ? 'Benefit':'Cost' }}</td>
+                                        <td>{{ $k->bobot  }}</td>
+                                        <td>
+                                            <a href="{{  url('kriteria',['id' => $k->id]) }}"><button class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="lihat data"><span class="glyphicon glyphicon-eye-open"></span> </button></a>
+                                            <a href="{{  url()->route('kriteria.edit', ['id' => $k->id])}}"><button class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="ubah data"><span class="glyphicon glyphicon-pencil"></span> </button></a>
+                                            <a href="#" data-id="{{ $k->id  }}" class="destroy"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="hapus data"><span class="glyphicon glyphicon-trash"></span> </button></a>
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $index++;
+                                    @endphp
+                                    @endforeach
+                                </tbody>
+                            </table>
+			            </div>
                     </div>
                 </div>
             </div>
@@ -91,14 +114,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="create-form">
-                            <!-- form nama -->
                             <div class="form-group">
                                 <label>Nama*</label>
                                 <input type="text" class="form-control" name="nama" placeholder="Nama" required/>
                             </div>
-                            <!-- end form nama -->
 
-                            <!-- form jenis-kelamin -->
                             <div class="form-group">
                                 <label>Atribut*</label>
                                 <select class="form-control" name="atribut" required>
@@ -106,21 +126,16 @@
                                     <option value="cost">Cost</option>
                                 </select>
                             </div>
-                            <!-- end form jenis-kelamin -->
 
-                            <!-- form telp -->
                             <div class="form-group">
                                 <label>Nilai*</label>
-                                <input type="text" class="form-control" name="bobot" pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="Bobot" required/>
+                                <input type="text" min="1" max="4" class="form-control" name="bobot" pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="Bobot" required/>
                             </div>
-                            <!-- end form telp-->
 
-                            <!-- form description -->
                             <div class="form-group">
                                 <label>Description*</label>
                                 <textarea class="form-control" placeholder="Description" name="description" required></textarea>
                             </div>
-                            <!-- end form description-->
                         </div>
                     </div>
                     <div class="modal-footer">
