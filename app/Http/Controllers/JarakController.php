@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Wisata;
+use App\Kriteria;
+use App\JarakUser;
 
 class JarakController extends Controller
 {
@@ -32,6 +34,37 @@ class JarakController extends Controller
                 'daerah' => $value->daerah,
                 'jarak' => $hasil,
             ];
+
+            //Cek dan Set Nilai dari Jarak
+            if ($hasil < 5) {
+                $set_nilai = 3;
+            } elseif ($hasil >= 5 && $hasil <= 10){
+                $set_nilai = 2;
+            } else {
+                $set_nilai = 1;
+            }
+
+            $kriteria = Kriteria::where('nama', 'like', 'jarak')->first();
+            $cekju = JarakUser::where('user_id', auth()->user()->id)->where('wisata_id', $value->id)->first();
+            if ($cekju == null) {
+                JarakUser::insert([
+                    'wisata_id' => $value->id,
+                    'kriteria_id' => $kriteria->id,
+                    'jarak' => $hasil,
+                    'nilai' => $set_nilai,
+                    'user_id' => auth()->user()->id,
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s"),
+                ]);
+            } else {
+                $cekju->update([
+                    'jarak' => $hasil,
+                    'nilai' => $set_nilai,
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s"),
+                ]);
+            }
+
             array_push($hasil_jarak, $array_jarak);
         }
 

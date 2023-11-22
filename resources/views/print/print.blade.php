@@ -32,6 +32,7 @@
                         <th style="text-align: center">Nilai</th>
                     </tr>
                     </thead>
+                    @if ($data['v'])
                     <tbody>
                     @foreach($data['v'] as $v)
                         @php
@@ -45,6 +46,7 @@
                         </tr>
                     @endforeach
                     </tbody>
+                    @endif
                 </table>
             </div>
         </div>

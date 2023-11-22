@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Utils\WPGenerator;
 use App\Wisata;
-use App\Kriteria;
 class PrintController extends Controller
 {
 
@@ -17,13 +16,16 @@ class PrintController extends Controller
     public function index(){
         $data = WPGenerator::weight_product();
         $penerima = Wisata::all();
-        arsort($data['v']);
+        if ($data['v']) {
+            arsort($data['v']);
 
-        foreach ($penerima as $p) {
-            if(array_key_exists($p->id, $data['v'])){
-                $data['v'][$p->id] = $p->nama . "|" . $data['v'][$p->id];
+            foreach ($penerima as $p) {
+                if(array_key_exists($p->id, $data['v'])){
+                    $data['v'][$p->id] = $p->nama . "|" . $data['v'][$p->id];
+                }
             }
         }
+
         return view('print.print')->with([
             'menu' => 'list',
             'data' => $data,

@@ -5,6 +5,7 @@ namespace App\Utils;
 use Illuminate\Support\Facades\DB;
 use App\Kriteria;
 use App\Nilai;
+use App\JarakUser;
 
 /**
  * Created by PhpStorm.
@@ -25,6 +26,20 @@ class WPGenerator
 
 
         $nilai = Nilai::orderBy('wisata_id')->get();
+        foreach ($nilai as $key => $value) {
+            $jarak_user = JarakUser::where('wisata_id', $value->wisata_id)->where('user_id', auth()->user()->id)->first();
+            if ($jarak_user != null) {
+                if ($value->wisata_id == $jarak_user->wisata_id && $value->kriteria_id == $jarak_user->kriteria_id) {
+                    $value->nilai = $jarak_user->nilai;
+                }
+            } else {
+                return [
+                    'weight' => null,
+                    's' => null,
+                    'v' => null
+                ];
+            }
+        }
         $penerima = null;
         $s = [];
 

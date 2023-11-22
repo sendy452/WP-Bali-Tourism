@@ -36,6 +36,7 @@
                                         </th>
                                     </tr>
                                 </thead>
+                                @if ($data['weight'])
                                 <tbody>
                                     @foreach($kriteria as $k)
                                     <tr>
@@ -44,6 +45,7 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
+                                @endif
                             </table>
                         </div>
                         <!-- Weight -->
@@ -62,6 +64,7 @@
                                     </th>
                                 </tr>
                                 </thead>
+                                @if ($data['s'])
                                 <tbody>
                                 @foreach($penerima as $p)
                                     <tr>
@@ -78,6 +81,7 @@
                                     </tr>
                                 @endforeach
                                 </tbody>
+                                @endif
                             </table>
                         </div>
                         <!-- S-->
@@ -96,6 +100,7 @@
                                     </th>
                                 </tr>
                                 </thead>
+                                @if ($data['v'])
                                 <tbody>
                                 @foreach($penerima as $p)
                                     <tr>
@@ -109,6 +114,7 @@
                                     </tr>
                                 @endforeach
                                 </tbody>
+                                @endif
                             </table>
                         </div>
                     </div>
