@@ -15,11 +15,11 @@ class PrintController extends Controller
 
     public function index(){
         $data = WPGenerator::weight_product();
-        $penerima = Wisata::all();
+        $wisata = Wisata::all();
         if ($data['v']) {
             arsort($data['v']);
 
-            foreach ($penerima as $p) {
+            foreach ($wisata as $p) {
                 if(array_key_exists($p->id, $data['v'])){
                     $data['v'][$p->id] = $p->nama . "|" . $data['v'][$p->id];
                 }
@@ -29,7 +29,7 @@ class PrintController extends Controller
         return view('print.print')->with([
             'menu' => 'list',
             'data' => $data,
-            'penerima' => $penerima
+            'wisata' => $wisata
         ]);
     }
 }

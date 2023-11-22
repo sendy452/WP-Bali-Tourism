@@ -41,14 +41,14 @@ class HomeController extends Controller
         $nilai = Nilai::all();
         $data = [];
         $tmp_nilai = [];
-        $penerima_id = null;
+        $wisata_id = null;
         foreach ($nilai as $n){
-            if($n->wisata_id != $penerima_id){
-                $penerima_id = $n->wisata_id;
+            if($n->wisata_id != $wisata_id){
+                $wisata_id = $n->wisata_id;
                 $tmp_nilai = [];
             }
             array_push($tmp_nilai, $n->nilai);
-            $data[$penerima_id]= $tmp_nilai;
+            $data[$wisata_id]= $tmp_nilai;
         }
 
 
@@ -63,14 +63,14 @@ class HomeController extends Controller
     public function calculate(){
         $data = WPGenerator::weight_product();
         $kriteria = Kriteria::all();
-        $penerima = Wisata::all();
+        $wisata = Wisata::all();
 
 
         return view('calculate')->with([
             'menu' => 'list',
             'kriteria' => $kriteria,
             'data' => $data,
-            'penerima' => $penerima
+            'wisata' => $wisata
         ]);
     }
 }

@@ -66,14 +66,14 @@
                                 </thead>
                                 @if ($data['s'])
                                 <tbody>
-                                @foreach($penerima as $p)
+                                @foreach($wisata as $p)
                                     <tr>
                                         <td>{{ $p->nama }}</td>
                                         <td>
                                             @foreach($data['s'] as $d)
 
 
-                                                @if($p->id == $d['penerima'])
+                                                @if($p->id == $d['wisata'])
                                                     {{ $d['s'] }}&nbsp;
                                                 @endif
                                             @endforeach
@@ -102,7 +102,7 @@
                                 </thead>
                                 @if ($data['v'])
                                 <tbody>
-                                @foreach($penerima as $p)
+                                @foreach($wisata as $p)
                                     <tr>
                                         <td>{{ $p->nama }}</td>
                                         <td>

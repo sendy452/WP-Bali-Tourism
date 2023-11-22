@@ -40,7 +40,7 @@ class WPGenerator
                 ];
             }
         }
-        $penerima = null;
+        $wisata = null;
         $s = [];
 
 
@@ -48,15 +48,15 @@ class WPGenerator
         $hit = 0;
         $len = count($nilai);
         foreach ($nilai as $n) {
-            if($penerima!=$n->wisata_id){
-                if($penerima!=null){
+            if($wisata!=$n->wisata_id){
+                if($wisata!=null){
                     $tmp = [];
                     $tmp['s'] = $tmp_s;
-                    $tmp['penerima'] = $penerima;
+                    $tmp['wisata'] = $wisata;
                     array_push($s,$tmp);
                 }
 
-                $penerima = $n->wisata_id;
+                $wisata = $n->wisata_id;
                 $tmp_s = 1;
             }
 
@@ -70,7 +70,7 @@ class WPGenerator
             if($hit == $len-1){
                 $tmp = [];
                 $tmp['s'] = $tmp_s;
-                $tmp['penerima'] = $penerima;
+                $tmp['wisata'] = $wisata;
                 array_push($s,$tmp);
             }
             $hit++;
@@ -83,7 +83,7 @@ class WPGenerator
         $v = [];
 
         foreach ($s as $single_s){
-            $v[$single_s['penerima']] = $single_s['s']/$vj;
+            $v[$single_s['wisata']] = $single_s['s']/$vj;
         }
 
         return [

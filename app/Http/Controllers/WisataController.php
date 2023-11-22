@@ -49,8 +49,8 @@ class WisataController extends Controller
      */
     public function store(StoreWisata $request)
     {
-        $penerima = Wisata::create($request->except(['_token']));
-        if($penerima){
+        $wisata = Wisata::create($request->except(['_token']));
+        if($wisata){
             $request->session()->flash('success', 'Berhasil menambahkan data wisata.');
         }else{
             $request->session()->flash('error', 'Gagal menambahkan data wisata.');
@@ -103,16 +103,16 @@ class WisataController extends Controller
             'latitude' =>  'required|max:50',
             'longitude' =>  'required|max:50',
         ]);
-        $penerima = Wisata::findOrFail($id);
+        $wisata = Wisata::findOrFail($id);
 
-        $update = $penerima->update($request->except(['_token','_method']));
+        $update = $wisata->update($request->except(['_token','_method']));
         if($update){
             $request->session()->flash('success', 'Berhasil mengubah data wisata.');
             return redirect()->action('WisataController@index');
         }else{
             $request->session()->flash('error', 'Gagal mengubah data wisata.');
         }
-        return view('wisata.update', ['penerima' => $penerima, 'menu' => 'wisata' , 'title' => 'Ubah data ' . $penerima->nama]);
+        return view('wisata.update', ['wisata' => $wisata, 'menu' => 'wisata' , 'title' => 'Ubah data ' . $wisata->nama]);
     }
 
     /**
@@ -123,8 +123,8 @@ class WisataController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $penerima = Wisata::findOrFail($id);
-        if($penerima->delete()){
+        $wisata = Wisata::findOrFail($id);
+        if($wisata->delete()){
             $request->session()->flash('success','Berhasil menghapus data wisata.');
         }else{
             $request->session()->flash('error','Gagal menghapus data wisata.');
