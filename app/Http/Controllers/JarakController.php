@@ -61,14 +61,14 @@ class JarakController extends Controller
                 $cekju->update([
                     'jarak' => $hasil,
                     'nilai' => $set_nilai,
-                    'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s"),
                 ]);
             }
 
             if (auth()->user()->level == "admin") {
                 Nilai::where('wisata_id', $value->id)->where('kriteria_id', $kriteria->id)->update([
-                    'nilai' => $set_nilai
+                    'nilai' => $set_nilai,
+                    'updated_at' => date("Y-m-d H:i:s"),
                 ]);
             }
 
