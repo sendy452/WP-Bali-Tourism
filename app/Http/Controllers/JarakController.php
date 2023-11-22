@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Wisata;
 use App\Kriteria;
 use App\JarakUser;
+use App\Nilai;
 
 class JarakController extends Controller
 {
@@ -62,6 +63,12 @@ class JarakController extends Controller
                     'nilai' => $set_nilai,
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s"),
+                ]);
+            }
+
+            if (auth()->user()->level == "admin") {
+                Nilai::where('wisata_id', $value->id)->where('kriteria_id', $kriteria->id)->update([
+                    'nilai' => $set_nilai
                 ]);
             }
 
