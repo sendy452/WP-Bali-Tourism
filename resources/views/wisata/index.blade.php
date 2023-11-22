@@ -10,6 +10,8 @@
     <div class="container">
         @if(Auth::user()->level==='admin')
             @include('component.menu_admin')
+        @else
+            @include('component.menu_user')
         @endif
     </div>
 
@@ -38,56 +40,65 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $title }}</div>
                     <div class="panel-body">
+                        @if (auth()->user()->level == "admin")
                         <div class="form-group">
                             <button class="btn btn-success" data-toggle="modal" href="#create">
                                 <span class="glyphicon glyphicon-plus-sign"></span>
                                 Tambah Wisata
                             </button>
                         </div>
-			<div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nama</th>
-                                    <th>Daerah</th>
-                                    <th>Alamat</th>
-                                    <th>Fasilitas</th>
-                                    <th>Jam Operasional</th>
-                                    <th>Ulasan</th>
-                                    <th>Rating</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $index=1;
-                                @endphp
-                                @foreach($wisata as $c)
-                                <tr>
-                                    <td>{{ (($wisata->currentPage() - 1 ) * $wisata->perPage() ) + $loop->iteration }}</td>
-                                    <td>{{ $c->nama  }}</td>
-                                    <td>{{ $c->daerah  }}</td>
-                                    <td>{{ $c->alamat }}</td>
-                                    <td>{{ $c->fasilitas  }}</td>
-                                    <td>{{ date("H:i", strtotime($c->jam_buka)) .' - '. date("H:i", strtotime($c->jam_tutup))  }}</td>
-                                    <td>{{ $c->ulasan  }}</td>
-                                    <td>{{ $c->rating  }}</td>
-                                    <td>
-                                        <a href="{{  url('wisata',['id' => $c->id]) }}"><button class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="lihat data"><span class="glyphicon glyphicon-eye-open"></span> </button></a>
-                                        <a href="{{  url()->route('wisata.edit', ['id' => $c->id])}}"><button class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="ubah data"><span class="glyphicon glyphicon-pencil"></span> </button></a>
-                                        <a href="{{  url()->route('nilai.create',['wisata' => $c->id]) }}"><button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="penilaian"><span class="glyphicon glyphicon-ok"></span> </button></a>
-                                        <a href="#"data-id="{{ $c->id  }}" class="destroy"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="hapus data"><span class="glyphicon glyphicon-trash"></span> </button></a>
-                                    </td>
-                                </tr>
-                                @php
-                                    $index++;
-                                @endphp
-                                @endforeach
-                            </tbody>
-                        </table>
-			</div>
-                        {{ $wisata->links()  }}
+                        @endif
+                        <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama</th>
+                                                <th>Daerah</th>
+                                                <th>Alamat</th>
+                                                <th>Fasilitas</th>
+                                                <th>Jam Operasional</th>
+                                                <th>Ulasan</th>
+                                                <th>Rating</th>
+                                                <th>Latitude</th>
+                                                <th>Longitude</th>
+                                                @if (auth()->user()->level == "admin")
+                                                <th>Action</th>
+                                                @endif
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $index=1;
+                                            @endphp
+                                            @foreach($wisata as $c)
+                                            <tr>
+                                                <td>{{ (($wisata->currentPage() - 1 ) * $wisata->perPage() ) + $loop->iteration }}</td>
+                                                <td>{{ $c->nama  }}</td>
+                                                <td>{{ $c->daerah  }}</td>
+                                                <td>{{ $c->alamat }}</td>
+                                                <td>{{ $c->fasilitas  }}</td>
+                                                <td>{{ date("H:i", strtotime($c->jam_buka)) .' - '. date("H:i", strtotime($c->jam_tutup))  }}</td>
+                                                <td>{{ $c->ulasan  }}</td>
+                                                <td>{{ $c->rating  }}</td>
+                                                <td>{{ $c->latitude  }}</td>
+                                                <td>{{ $c->longitude  }}</td>
+                                                @if (auth()->user()->level == "admin")
+                                                <td>
+                                                    <a href="{{  url('wisata',['id' => $c->id]) }}"><button class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="bottom" title="lihat data"><span class="glyphicon glyphicon-eye-open"></span> </button></a>
+                                                    <a href="{{  url()->route('wisata.edit', ['id' => $c->id])}}"><button class="btn  btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="ubah data"><span class="glyphicon glyphicon-pencil"></span> </button></a>
+                                                    <a href="{{  url()->route('nilai.create',['wisata' => $c->id]) }}"><button class="btn  btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="penilaian"><span class="glyphicon glyphicon-ok"></span> </button></a>
+                                                    <a href="#"data-id="{{ $c->id  }}" class="destroy"><button class="btn  btn-sm btn-danger" data-toggle="tooltip" data-placement="bottom" title="hapus data"><span class="glyphicon glyphicon-trash"></span> </button></a>
+                                                </td>
+                                                @endif
+                                            </tr>
+                                            @php
+                                                $index++;
+                                            @endphp
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                        </div>
                     </div>
                 </div>
             </div>
