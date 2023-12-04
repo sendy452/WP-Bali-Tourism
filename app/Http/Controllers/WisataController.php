@@ -21,7 +21,7 @@ class WisataController extends Controller
      */
     public function index()
     {
-        $wisata = Wisata::paginate(10);
+        $wisata = Wisata::get();
 
         $data = array(
             'title' => 'Wisata',

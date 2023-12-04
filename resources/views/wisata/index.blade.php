@@ -2,6 +2,7 @@
 
 @push('css')
     <link href="{{ asset('plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')  }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('plugins/datatable/jquery.dataTables.min.css')  }}" rel="stylesheet"/>
 @endpush
 
 @section('content')
@@ -49,7 +50,7 @@
                         </div>
                         @endif
                         <div class="table-responsive">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="tourism">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -73,7 +74,7 @@
                                             @endphp
                                             @foreach($wisata as $c)
                                             <tr>
-                                                <td>{{ (($wisata->currentPage() - 1 ) * $wisata->perPage() ) + $loop->iteration }}</td>
+                                                <td>{{ $index }}</td>
                                                 <td>{{ $c->nama  }}</td>
                                                 <td>{{ $c->daerah  }}</td>
                                                 <td>{{ $c->alamat }}</td>
@@ -214,9 +215,18 @@
 @endsection
 
 @push('javascript')
+    <script src="{{ asset('plugins/datatable/jquery.dataTables.min.js')  }}"></script>
     <script src="{{ asset('plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')  }}" type="text/javascript"></script>
     <script>
         $(document).ready(function(){
+            $('#tourism').DataTable({
+                aaSorting: [[1, 'asc']],
+                search : false,
+                fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                    $('td:eq(0)', nRow).html(iDisplayIndexFull +1);
+                }
+            });
+
             $('[data-toggle="tooltip"]').tooltip()
             $('#date').datepicker({
                 format : 'yyyy-mm-dd'

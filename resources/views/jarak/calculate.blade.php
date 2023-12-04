@@ -55,7 +55,7 @@
                         @if (@$wisata)
                         <h3>List Wisata Terdekat</h3>
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="weight">
+                            <table class="table table-bordered" id="distance">
                                 <thead>
                                     <tr>
                                         <th>Wisata</th>
@@ -89,7 +89,7 @@
 
 <script>
     $(document).ready(function(){
-        $('#weight').DataTable({
+        $('#distance').DataTable({
             aaSorting: [[2, 'asc']],
             search : false
         });
